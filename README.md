@@ -1,5 +1,5 @@
 # Azul3D - gfx/gl2 #
-This package provides an OpenGL 2.X based graphics renderer for Azul3D. The behavior of the renderer is fully defined by Azul3D's `gfx` package.
+This package provides an OpenGL 2.X based graphics renderer for Azul3D. The behavior of the renderer is fully defined by Azul3D's [gfx](http://azul3d.org/packages.html#gfx) package.
 
 # Version 2 (in development) #
 * Documentation
