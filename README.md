@@ -7,9 +7,9 @@ This package provides an OpenGL 2.X based graphics renderer for Azul3D. The beha
  * `import "azul3d.org/gfx/gl2.v2"`
 * Changes
  * Behavior is fully defined by the [gfx.v2](http://www.azul3d.org/gfx.v2)  package.
- * Added OS X support (see azul3d/gfx-gl2#14).
- * Added Better Debugging (see azul3d/gfx-gl2#12).
- * Switched to using Glow for generating OpenGL wrappers (see azul3d/gfx-gl2#11).
+ * Added OS X support (see [#14](https://github.com/azul3d/gfx-gl2/issues/14)).
+ * Added Better Debugging (see [#12](https://github.com/azul3d/gfx-gl2/issues/12)).
+ * Switched to using Glow for generating OpenGL wrappers (see [#11](https://github.com/azul3d/gfx-gl2/issues/11)).
 
 # Version 1 (latest version) #
 * Documentation
