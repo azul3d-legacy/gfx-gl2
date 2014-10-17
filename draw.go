@@ -95,9 +95,12 @@ func (n nativeObject) needRebuild(o *gfx.Object, c *gfx.Camera) bool {
 }
 
 func (n nativeObject) rebuild(o *gfx.Object, c *gfx.Camera) nativeObject {
+	objMat := o.Transform.Mat4()
+	n.Transform = objMat
+
 	// The "Model" matrix is the Object's transformation matrix, we feed it
 	// directly in.
-	n.model = gfx.ConvertMat4(o.Transform.Mat4())
+	n.model = gfx.ConvertMat4(objMat)
 
 	// The "View" matrix is the coordinate system conversion, multiplied
 	// against the camera object's transformation matrix
@@ -117,7 +120,7 @@ func (n nativeObject) rebuild(o *gfx.Object, c *gfx.Camera) nativeObject {
 	n.projection = gfx.ConvertMat4(projection)
 
 	// The "MVP" matrix is Model * View * Projection matrix.
-	mvp := o.Transform.Mat4()
+	mvp := objMat
 	mvp = mvp.Mul(view)
 	mvp = mvp.Mul(projection)
 	n.mvp = gfx.ConvertMat4(mvp)
@@ -348,6 +351,14 @@ func (r *Renderer) updateUniform(native *nativeShader, name string, value interf
 			gl.Uniform4fv(location, int32(len(v)), &v[0].X)
 		}
 
+	case gfx.Color:
+		gl.Uniform4fv(location, 1, &v.R)
+
+	case []gfx.Color:
+		if len(v) > 0 {
+			gl.Uniform4fv(location, int32(len(v)), &v[0].R)
+		}
+
 	case gfx.Mat4:
 		gl.UniformMatrix4fv(location, 1, false, &v[0][0])
 
@@ -514,28 +525,6 @@ func (r *Renderer) drawMesh(ns *nativeShader, m *gfx.Mesh) {
 		gl.EnableVertexAttribArray(location)
 		defer gl.DisableVertexAttribArray(location)
 		gl.VertexAttribPointer(location, 3, gl.FLOAT, false, 0, nil)
-	}
-
-	if native.colors != 0 {
-		// Use colors data.
-		location, ok = r.findAttribLocation(ns, "Color")
-		if ok {
-			gl.BindBuffer(gl.ARRAY_BUFFER, native.colors)
-			gl.EnableVertexAttribArray(location)
-			defer gl.DisableVertexAttribArray(location)
-			gl.VertexAttribPointer(location, 4, gl.FLOAT, false, 0, nil)
-		}
-	}
-
-	if native.bary != 0 {
-		// Use bary data.
-		location, ok = r.findAttribLocation(ns, "Bary")
-		if ok {
-			gl.BindBuffer(gl.ARRAY_BUFFER, native.bary)
-			gl.EnableVertexAttribArray(location)
-			defer gl.DisableVertexAttribArray(location)
-			gl.VertexAttribPointer(location, 3, gl.FLOAT, false, 0, nil)
-		}
 	}
 
 	// Use each texture coordinate set data.
