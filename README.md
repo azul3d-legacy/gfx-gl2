@@ -1,6 +1,13 @@
 # Azul3D - gfx/gl2 #
 This package provides an OpenGL 2.X based graphics renderer for Azul3D. The behavior of the renderer is fully defined by Azul3D's [gfx](http://azul3d.org/packages.html#gfx) package.
 
+# Version 2.0.1 #
+* Documentation
+ * [azul3d.org/gfx/gl2.v2](http://azul3d.org/gfx/gl2.v2)
+ * `import "azul3d.org/gfx/gl2.v2"`
+* Changes
+ * Fixed a bug that caused MVP matrices to constantly be recalculated (see [#22](https://github.com/azul3d/gfx-gl2/issues/22)).
+
 # Version 2 #
 * Documentation
  * [azul3d.org/gfx/gl2.v2](http://azul3d.org/gfx/gl2.v2)
