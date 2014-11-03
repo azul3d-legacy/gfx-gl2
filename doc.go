@@ -18,4 +18,12 @@
 // to a mipmapped or non-mipmapped filter after the texture has been loaded,
 // but mipmapped can only be turned on with a loaded texture if when it loaded
 // it had a mipmapped minification filter set on it.
+//
+// A shader will have it's inputs (from the gfx.Shader.Inputs map) mapped by
+// name to GLSL uniforms. Types map directly to their GLSL counterparts (e.g.
+// gfx.Vec4 -> GLSL "vec4" type), the only two notable ones are:
+//
+//  gfx.Color -> GLSL "vec4" type
+//  gfx.TexCoord -> GLSL "vec2" type
+//
 package gl2
